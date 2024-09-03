@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: testing_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: lifeiseasy>>
+    ports:
+      - "5432:5432"
+
+  app:
+    image: izunna587/testing-devops
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/testing_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: lifeiseasy>>
+    depends_on:
+      - db
